@@ -6,7 +6,6 @@ x3=[0,1,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,1,1,
 x31=[0,0,1,1,1,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,1,1,1,1,0,]
 proba = Red(x31,2)
 proba.aprender()
+#proba.update()
 print(x31)
-#print(proba.vq)
-
-print ([round(x,2) for x in proba.vq])
+print (proba.vq.round(decimals=1))
