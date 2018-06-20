@@ -2,8 +2,8 @@ import numpy as np
 
 class Red():
     def __init__(self, entrada,nSalidas):
-        self.inputt = entrada
-        self.nSalidas  = nSalidas
+        self.inputt = np.array(entrada)
+        self.nSalidas  = np.array(nSalidas)
         self.pesos = np.random.rand(len(entrada),nSalidas)
         self.b = np.random.rand(1,nSalidas)
         self.c = np.random.rand(1,len(entrada))
@@ -12,15 +12,20 @@ class Red():
         self.hq = 1
 
     def forward (self, x, y,b):
-        ##activacion
-        #self.outputv =1/(1+np.exp(-np.matmul(self.inputt,self.pesos))+self.b)
-        #outputh = 1/(1+np.exp(-np.matmul(self.pesos,self.outputv))+self.c)
+        #print x.shape
+        #print y.shape
+        #print b.shape
         return 1/(1+np.exp(-np.matmul(x,y))+b)
 
     def aprender (self):
         self.h = self.forward(self.inputt,self.pesos,self.b)
-        self.vq = self.forward(self.pesos,self.h.T,self.c).T
+        print "h" , self.h.shape
+                                    #5X2  #2x1   #1x5
+        self.vq = self.forward(self.pesos,self.h.T,self.c.T).T
+        print "vq" , self.vq.shape
+
         self.hq = self.forward(self.vq,self.pesos,self.b)
+        print "hq" , self.hq
 
     def update(self, factor):
         self.pesos = self.pesos +factor*(np.matmul((self.h).T,inputt)-np.matmul((self.hq).T,vq)).T
